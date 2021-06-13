@@ -1,0 +1,26 @@
+create or replace VIEW PLAYER_DATA_VIEW 
+as select s.song_id, s.song_title_kr, s.song_title_en, s.song_title_jp, s.album_id, s.production_id, s.song_is_unit, s.song_color_type, s.song_fixed_color, s.song_bpm,
+u.unit_id, u.unit_name_kr, u.unit_name_en, u.unit_name_jp, u.unit_color, u.unit_shown_color,
+i.idol_id, i.idol_name_kr, i.idol_name_en, i.idol_name_jp, i.idol_shown_color, i.idol_color,
+c.cv_id, c.cv_name_kr, c.cv_name_en, c.cv_name_jp
+from SONG as s 
+left join SONG_IDOL as si on s.song_id=si.song_id 
+left join SONG_UNIT as su on s.song_id=su.song_id 
+left join UNIT_IDOL as ui on su.unit_id=ui.unit_id 
+left join UNIT as u on su.unit_id=u.unit_id 
+left join IDOL as i on si.idol_id=i.idol_id or ui.idol_id=i.idol_id 
+left join CV as c on i.idol_id=c.idol_id;
+
+create or replace VIEW SONG_DATA_VIEW 
+as select s.song_id, s.song_title_kr, s.song_title_en, s.song_title_jp, s.album_id, s.production_id, s.song_is_unit, s.song_color_type, s.song_fixed_color, s.song_bpm,
+u.unit_id, u.unit_name_kr, u.unit_name_en, u.unit_name_jp, u.unit_color, u.unit_shown_color,
+i.idol_id, i.idol_name_kr, i.idol_name_en, i.idol_name_jp, i.idol_shown_color, i.idol_color,
+c.cv_id, c.cv_name_kr, c.cv_name_en, c.cv_name_jp
+from SONG as s 
+left join SONG_IDOL as si on s.song_id=si.song_id 
+left join SONG_UNIT as su on s.song_id=su.song_id  
+left join UNIT as u on su.unit_id=u.unit_id 
+left join IDOL as i on si.idol_id=i.idol_id 
+left join CV as c on i.idol_id=c.idol_id;
+
+create or replace VIEW SONG_ALBUM_VIEW as select SONG.*, ALBUM.album_release_date from SONG INNER JOIN ALBUM ON SONG.album_id=ALBUM.album_id

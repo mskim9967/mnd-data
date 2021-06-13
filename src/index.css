@@ -1,0 +1,45 @@
+/* @font-face { font-family: 'NotoSansCJK'; src: url(./fonts/NotoSansCJK-Black.ttf) format('truetype'); font-weight: 700; }
+@font-face { font-family: 'NotoSansCJK'; src: url(./fonts/NotoSansCJK-Bold.ttf) format('truetype');  font-weight: 600; }
+@font-face { font-family: 'NotoSansCJK'; src: url(./fonts/NotoSansCJK-DemiLite.ttf) format('truetype'); font-weight: 300; }
+@font-face { font-family: 'NotoSansCJK'; src: url(./fonts/NotoSansCJK-Light.ttf) format('truetype'); font-weight: 200;  }
+@font-face { font-family: 'NotoSansCJK'; src: url(./fonts/NotoSansCJK-Medium.ttf) format('truetype'); font-weight: 500; }
+@font-face { font-family: 'NotoSansCJK'; src: url(./fonts/NotoSansCJK-Regular.ttf) format('truetype'); font-weight: 400; }
+@font-face { font-family: 'NotoSansCJK'; src: url(./fonts/NotoSansCJK-Thin.ttf) format('truetype'); font-weight: 100; } */
+
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+	
+* {
+
+box-sizing: border-box; /* 오페라(Opera) */
+
+-moz-box-sizing: border-box; /* 파이어폭스(Firefox)*/
+
+-webkit-box-sizing: border-box; /* 웹킷(Webkit) & 크롬(Chrome) */
+
+	//overscroll-behavior: contain;
+}
+
+
+
+body {
+font-family: "Noto Sans KR";
+	//font-family: "NotoSansCJK";
+	margin: 0;
+padding: 0;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	width:100vw;
+	font-size: 15px;
+
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+p {
+	margin: 0;
+}
+
+/* input::-ms-clear, input::-ms-reveal{ 	display:none;width:0;height:0; } input::-webkit-search-decoration, input::-webkit-search-cancel-button, input::-webkit-search-results-button, input::-webkit-search-results-decoration{ 	display:none; } */
