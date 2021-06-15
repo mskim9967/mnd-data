@@ -52,7 +52,7 @@ function Content(props){
 			</div>
 			
 		<Switch>
-			<Route path={'/:lang/:page'}>
+			<Route path={'/app/:lang/:page'}>
 				
 			</Route>
 		</Switch>
