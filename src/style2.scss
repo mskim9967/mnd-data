@@ -19,6 +19,7 @@ $timeL : 0.6s;
 	--lightShadow: #ffffff;
 	--shadow: #8f8f8f;
 	--darkShadow: #000000;
+	--eleBg: #000000;
 	
 	--im:0;
 	--cg:0;
@@ -37,6 +38,7 @@ $tabBg:  var(--tabBg);
 $lightShadow: var(--lightShadow);
 $shadow: var(--shadow);
 $darkShadow: var(--darkShadow);
+$eleBg: var(--eleBg);
 
 $im: var(--im);
 $cg: var(--cg);
@@ -60,6 +62,16 @@ $sc: var(--sc);
 	}
 }
 
+.MuiTab-wrapper{
+	color: $text;
+}
+.MuiBox-root{
+	color: $text;
+}
+.MuiTab-root{
+	padding: 6px;
+}
+
 .profile {
 	width:100%;
 	min-height:100%;
@@ -74,6 +86,10 @@ $sc: var(--sc);
 	}	
 }
 
+.setting.page {
+	padding: 15px 0px 60px 0px !important;
+}
+
 .playlistTab, .main{
 	color: var(--text);
 }
@@ -83,7 +99,7 @@ $sc: var(--sc);
 	
 	.graphArea {
 		margin: 0 auto;
-		max-width:500px;
+		max-width:50vh;
 	}
 }
 
@@ -92,18 +108,22 @@ $sc: var(--sc);
 	padding: 15px 15px 60px 15px !important;
 }
 
-
-.input {
+.input{
+.info {
 	.dial {
-		width:200px;
-		height:200px;
+		width:150px;
+		height:150px;
 	}
-	padding: 10px;
-	width:100%;
+	position: fixed;
+	left:0;
+box-sizing: content-box;
+	width:100vw;
 	.container {
+		box-sizing: content-box;
 		width:100%;
+		
 		display: grid;
-		grid-template-rows: 50px 200px 50px 50px 50px 50px;
+		grid-template-rows: 50px 200px 50px 50px 50px 50px 50px;
 		grid-template-columns: 1fr 1fr;
 		align-items: center;
 		justify-items: center;
@@ -122,6 +142,9 @@ $sc: var(--sc);
 		.head {
 			grid-column: 1 / span 2;
 		}
+		.crotch {
+			grid-column: 1 / span 2;
+		}
 		.feet {
 			grid-column: 1 / span 2;
 		}
@@ -131,9 +154,102 @@ $sc: var(--sc);
 		
 	}
 }
+}
+
+.setting {
+	.layout {
+		margin-top:50px;
+			color: var(--text);
+		
+			//background: $eleBg;
+
+	}
+}
+
+.program {
+	.container {
+		padding-right:12px;
+		padding-bottom:250px;
+		position: fixed;
+		height:100vh;
+		overflow:auto;
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		align-items: center;
+	}	
+}
+
+
+.tableModal.inactive {
+	transition: opacity $timeB, max-height 0s $timeB;
+	opacity: 0;
+	max-height: 0px;
+}
+.tableModal {
+	z-index:20;
+	position: fixed;
+	width:90vw;
+	height: 70vh;
+	opacity: 1;
+	transition: opacity $timeC, max-height 0s;
+	max-height: 100%;
+	top:15vh;
+	left:5vw;
+	background: $pageBg;
+	
+}
+
+.modal.inactive {
+	transition: opacity $timeB, max-height 0s $timeB;
+	opacity: 0;
+	max-height: 0px;
+}
+.modal {
+	z-index:20;
+	position: fixed;
+	width:200px;
+	height: 140px;
+	opacity: 1;
+	transition: opacity $timeC, max-height 0s;
+	max-height: 100%;
+	top:calc(50vh - 70px);
+	left:calc(50vw - 100px);
+	background: $pageBg;
+	border-radius:20px;
+	box-shadow: 0 0 7px 0px #000000;
+	padding:10px 20px 10px 20px;
+	display: grid;
+	grid-template-rows: 1.2fr 0.8fr;
+	
+}
+
+.bg.inactive {
+	display: relative;
+	opacity: 0;
+	transition: opacity $timeB, max-height 0s $timeB;
+	max-height: 0px;
+
+}
+.bg {
+	
+	z-index: 10;
+
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: #000000;
+
+	position: fixed;
+	opacity:0.7;
+	transition: opacity $timeC, max-height 0s;
+
+	max-height: 100%;
+}
+
 
 .table {
-	margin-top:100px;
 }
 
 
@@ -217,7 +333,7 @@ body {
 	.bg.inactive {
 		
 		display: relative;
-		opacity: 0%;
+		opacity: 0;
 		transition: opacity $timeB, max-height 0s $timeB;
 		max-height: 0px;
 		
@@ -232,7 +348,7 @@ body {
 		background-color: #000000;
 		
 		position: fixed;
-		opacity:70%;
+		opacity:0.7;
 		transition: opacity $timeC, max-height 0s;
 
 		max-height: 100%;
@@ -348,7 +464,7 @@ body {
 	
 	.playlistModal {
 		&.inactive {
-			opacity: 0%;
+			opacity: 0;
 			transition: opacity $timeC, max-height 0s $timeC;
 			max-height: 0px;
 			.modalArea{
@@ -452,7 +568,7 @@ body {
 		
 		.bg {
 			&.inactive {
-				opacity: 0%;
+				opacity: 0;
 				transition: opacity $timeC, max-height 0s $timeC;
 				max-height: 0px;
 			}
@@ -462,7 +578,7 @@ body {
 			bottom: 0;
 			left: 0;
 			background-color: #000000;
-			opacity:40%;
+			opacity:0.4;
 			transition: opacity $timeC, max-height 0s;
 			max-height: 100%;
 		}

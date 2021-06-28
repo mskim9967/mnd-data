@@ -16,6 +16,7 @@ function App(props) {
 		document.documentElement.style.setProperty("--lightShadow", '#ffffff');
 		document.documentElement.style.setProperty("--shadow", '#8f8f8f');
 		document.documentElement.style.setProperty("--darkShadow", '#000000');	
+		document.documentElement.style.setProperty("--eleBg", '#f5f5f5');	
 		
 		document.documentElement.style.setProperty("--im", '#fffcfc');	
 		document.documentElement.style.setProperty("--cg", '#f5f8ff');	
@@ -31,6 +32,7 @@ function App(props) {
 		document.documentElement.style.setProperty("--lightShadow", '#0a0a0a');
 		document.documentElement.style.setProperty("--shadow", '#000000');
 		document.documentElement.style.setProperty("--darkShadow", '#777777');	
+		document.documentElement.style.setProperty("--eleBg", '#333333');	
 		
 		document.documentElement.style.setProperty("--im", '#362e2e');	
 		document.documentElement.style.setProperty("--cg", '#2e3036');	
@@ -54,7 +56,6 @@ function App(props) {
 		<div className={`App ${props.anim}`}> 
 			<Switch>
 				<Route path="/:lang/:page">
-					<Popup></Popup>
 					<Content></Content>
 					<Nav></Nav>
 				</Route>
@@ -68,8 +69,7 @@ function App(props) {
 function stateToProps(state) {
     return {
 				info: state.infoReducer,
-				isPlayerActive: state.playerActiveReducer,
-        playerReducer : state.playerReducer,
+				
 				lang: state.langReducer,
 				nowPage: state.pageReducer,
 				theme: state.themeReducer,

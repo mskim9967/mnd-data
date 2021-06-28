@@ -11,6 +11,16 @@ import SyncDisabledIcon from '@material-ui/icons/SyncDisabled';
 
 import { Switch } from '@material-ui/core';
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
+const lightTheme = createMuiTheme({
+  palette: {
+	 primary: {
+      main: "#ff8585",
+     },
+    type: "light"
+  }
+});
 
 function Popup(props) {
 	const { lang, page } = useParams();
@@ -34,6 +44,7 @@ function Popup(props) {
 				}
 			</div>	
 			
+			<ThemeProvider theme={{...lightTheme}}>
 			<div className={`detailsArea ${!isPopupActiveded&&'inactive'}`}>
 				<div className={`alignCenter loginArea`}>login을 해주십시오.</div>
 				<div className='alignCenter langLabel'><LanguageIcon></LanguageIcon></div>
@@ -65,6 +76,7 @@ function Popup(props) {
 				</div>
 				
 			</div>	
+			</ThemeProvider>
 			
 			<div className={`bg ${!isPopupActiveded&&'inactive'}`} onClick={()=>{setPopupActiveded(false)}}></div>	
 		</div>

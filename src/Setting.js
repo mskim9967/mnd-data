@@ -5,6 +5,17 @@ import Button from '@material-ui/core/Button';
 import { DataGrid } from '@material-ui/data-grid';
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
+import List from '@material-ui/core/List';
+import { makeStyles } from '@material-ui/core/styles';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import Divider from '@material-ui/core/Divider'
+import { Switch } from '@material-ui/core';
+import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
+
+
 
 const lightTheme = createMuiTheme({
   palette: {
@@ -67,6 +78,7 @@ function Setting(props) {
 	const [latestIdx, setLatestIdx] = useState(null);
 	const [today, setToday] = useState(null);
 	
+	const [tableModal, setTableModal] = useState(false);
 	const [spanSec, setSpanSec] = useState(0);
 	const [rand, setRand] = useState(Math.floor(Math.random()*3));
 	const [rows, setRows] = useState([]);
@@ -90,9 +102,10 @@ function Setting(props) {
 		
 		if(page==='setting') {
 			let temp = [];
-			props.info?.map((e, i)=>{
-				temp.push({id: i, date: e.date.slice(2,10).replace(/-/g,'/'), height: e.data.height, weight:e.data.weight})
-			});
+			if(props.info?.length)
+				props.info?.map((e, i)=>{
+					temp.push({id: i, date: e.date.slice(2,10).replace(/-/g,'/'), height: e.data.height, weight:e.data.weight})
+				});
 			setRows(temp);
 		}
 	}, [location, props.info]);
@@ -100,17 +113,68 @@ function Setting(props) {
 	return (<>{(props.info !== null && props.info[latestIdx]?.data!==undefined) &&(
 	
 	<div className={`setting`}> 
-	<ThemeProvider theme={props.theme==='dark'?{...darkTheme}:{...lightTheme}}>
-		<div className='table' style={{ height: 500, width: '100%' }}>
-      		<DataGrid rows={rows} columns={columns} onSelectionChange={(e) => setSelectedRows([...e.rowIds])} hideFooter={true} localeText={{
-               footerRowSelected: (count) => `${count}ddd`
-                  }} checkboxSelection />
-   		</div>
-		<div className={`deleteButton`}>
-			<Button variant="outlined" size="large" color="primary"	onClick={()=>{if(selectedRows.length === latestIdx + 1) {props.dispatch({type:'clear'}); history.replace(`/${lang}/welcome`);} else props.dispatch({type:'delete', payload:selectedRows});}}>
-				 삭제
-			</Button>
+			<ThemeProvider theme={props.theme==='dark'?{...darkTheme}:{...lightTheme}}>	   
+	
+		<div className={`tableModal ${!tableModal&&'inactive'}`} style={{ zIndex: tableModal?100:-100}}>
+			<div className='table' style={{height: '70vh', width: '100%' }}>
+				<DataGrid rows={rows} columns={columns} onSelectionChange={(e) => setSelectedRows([...e.rowIds])} hideFooter={true} localeText={{
+				   footerRowSelected: (count) => `${count}ddd`
+					  }} checkboxSelection />
+			</div>
+			<div className={`deleteButton`}>
+				<Button variant="outlined" size="large" color="primary"	onClick={()=>{console.log(selectedRows); if(selectedRows.length === latestIdx + 1) {props.dispatch({type:'clear'}); history.replace(`/${lang}/welcome`);} else props.dispatch({type:'delete', payload:selectedRows});}}>
+					 {{ kr: '삭제', en: 'Delete' }[lang]}
+				</Button>
+			</div>
 		</div>
+		<div className={`bg ${!tableModal&&'inactive'}`} onClick={()=>setTableModal(false)}></div>
+				
+		<div className={`layout`}> 
+			<List component="nav" aria-label="main mailbox folders">
+				<ListItem button>
+				  <ListItemText primary="Language" />
+					<ListItemSecondaryAction>
+   						<ToggleButtonGroup size='small' exclusive={true} value={lang} onChange={(event, value)=>{
+							if(value) {
+								history.replace(`/${value}/${page}`);
+								//props.dispatch({type:'langChanged'});
+	
+							}
+						}}>
+							<ToggleButton value='kr'>한국어</ToggleButton>
+							<ToggleButton value='en'>&nbsp;ENG&nbsp;</ToggleButton>
+						</ToggleButtonGroup>
+					</ListItemSecondaryAction>
+				</ListItem>
+				<ListItem button>
+				  <ListItemText primary={{ kr: '다크 모드', en: 'Dark Mode' }[lang]} />
+					<ListItemSecondaryAction>
+						<Switch color='primary' checked={props.theme!=='light'} onChange={(event)=>{
+							event.target.checked?props.dispatch({type:'darkTheme'}):props.dispatch({type:'lightTheme'});		
+						}}></Switch>
+					</ListItemSecondaryAction>
+				</ListItem>
+				<ListItem button>
+				  <ListItemText primary={{ kr: "애니메이션 활성화", en: "Animation Activation" }[lang]} />
+					<ListItemSecondaryAction>
+						<Switch color='primary' checked={props.anim==='on'} onChange={(event)=>{
+							event.target.checked?props.dispatch({type:'animOn'}):props.dispatch({type:'animOff'});		
+						}}></Switch>
+					</ListItemSecondaryAction>
+				</ListItem>
+			  </List>
+			  <Divider />
+			  <List component="nav" aria-label="secondary mailbox folders">
+			  	<ListItem button>
+				  <ListItemText primary={{ kr: "이전 데이터 삭제", en: "Delete data" }[lang]} onClick={()=>setTableModal(true)}/>
+				</ListItem>
+				<ListItem button>
+				  <ListItemText primary={{ kr: "모든 데이터 초기화", en: "Clear all data" }[lang]} onClick={()=>{ props.dispatch({type:'clear'});history.replace(`/${lang}/welcome`)}}/>
+				</ListItem>
+			  </List>
+		</div>
+	
+		
     </ThemeProvider>
 	</div>
 	)}</>)
@@ -124,6 +188,7 @@ function stateToProps(state) {
 		nowPage: state.pageReducer,
 		theme: state.themeReducer,
 		playlists: state.playlistsReducer,
+		anim: state.animReducer,
 	}
 }
 

@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
 
-import SongCardList from './SongCardList.js';
-import PlaylistTab from './PlaylistTab.js';
 import Main from './Main.js';
 import Input from './Input.js';
 import Profile from './Profile.js';
 import Statistic from './Statistic.js';
+import Program from './Program.js';
 import Setting from './Setting.js';
 
 import { BrowserRouter as Switch, useParams, Route, useLocation } from 'react-router-dom';
@@ -18,13 +17,13 @@ function Content(props){
 	const { search } = useLocation();
 	const { song_id } = queryString.parse(search);	
 
-	useEffect(()=>{ 
+	useEffect(()=>{
 		if(page) props.dispatch({type:'changePage', payload:page});
 		
 		
 	}, [location]);
 
-	
+
 	return(
 		<div className={"content "}>
 			<div className={"page " + (props.nowPage === 'welcome' ? "active" : "")} >
@@ -42,9 +41,8 @@ function Content(props){
 				<Statistic></Statistic>
 			</div>
 			
-			<div className={"page " + (props.nowPage === 'program' ? "active" : "")} >
-				<div className={"search"} >
-				</div>
+			<div className={"page setting " + (props.nowPage === 'program' ? "active" : "")} >
+				<Program></Program>
 			</div>
 			
 			<div className={"page " + (props.nowPage === 'setting' ? "active" : "")} >
@@ -52,7 +50,7 @@ function Content(props){
 			</div>
 			
 		<Switch>
-			<Route path={'/app/:lang/:page'}>
+			<Route path={'/:lang/:page'}>
 				
 			</Route>
 		</Switch>

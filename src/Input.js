@@ -53,6 +53,7 @@ function Input(props) {
 	const waistRef = useRef(null);
 	const headRef = useRef(null);
 	const feetRef = useRef(null);
+	const crotchRef = useRef(null);
 	
 	const [heightDial, setHeightDial] = useState(0.5);
 	const [weightDial, setWeightDial] = useState(0.5);
@@ -75,17 +76,14 @@ function Input(props) {
 			setLatestIdx(props.info.length - 1);
 			if(props.info[props.info.length - 1]?.data?.name !== undefined) {
 				nameRef.current.value = props.info[props.info.length - 1]?.data?.name;
-				waistRef.current.value = props.info[props.info.length - 1]?.data?.waist;
+				
 				headRef.current.value = props.info[props.info.length - 1]?.data?.head;
-				feetRef.current.value = props.info[props.info.length - 1]?.data?.feet;
 			}
 		}
 		else {
 			setLatestIdx(null);
 			nameRef.current.value = '';
-			waistRef.current.value = '';
 			headRef.current.value = '';
-			feetRef.current.value = '';
 		}
 	}, [props.info, location]);
 	
@@ -94,7 +92,7 @@ function Input(props) {
 		<div className={`info`}>
 			<div className={`container`}>
 				 <ThemeProvider theme={props.theme==='dark'?{...darkTheme}:{...lightTheme}}>
-				<div className='name'><TextField id="standard-basic" label="이름" inputRef={nameRef}/> </div>	
+				<div className='name'><TextField id="standard-basic" label={{ kr: "이름", en: 'Name' }[lang]} inputRef={nameRef}/> </div>	
 				
 				<div className='dial alignCenter'><CircularInput value={heightDial} onChange={setHeightDial} radius={70}>
 					<CircularTrack strokeWidth={12} stroke={props.theme==='dark'?'#333':'#eee'}/>
@@ -109,13 +107,19 @@ function Input(props) {
 					<text x={70} y={70} textAnchor="middle" dy="0.3em" fontSize="25px" fontWeight="bold" fill={props.theme==='dark'?'#ccc':'#444'}>{(weightDial*90+40).toFixed(1)}kg</text>
 				</CircularInput></div>
 
-				<div className='waist'><TextField id="standard-basic" label="허리 둘레" inputRef={waistRef}/> </div>	
-				<div className='head'><TextField id="standard-basic" label="머리 둘레" inputRef={headRef}/> </div>	
-				<div className='feet'><TextField id="standard-basic" label="발 길이" inputRef={feetRef}/> </div>	
+				<div className='head'><TextField id="standard-basic" label={{ kr: "머리 둘레", en: 'Head circumference' }[lang]} inputRef={headRef}/> </div>	
+				<div className='crotch'><TextField id="standard-basic" label={{ kr: "다리 길이", en: 'Crotch length' }[lang]} inputRef={crotchRef}/> </div>		
 
-				<Button variant="outlined" size="large" color="primary"	onClick={()=>{history.push(`/${lang}/profile`); props.dispatch({type:'init', payload:{name: nameRef.current.value, height: (heightDial*70+140).toFixed(1), weight: (weightDial*90+40).toFixed(1), waist: waistRef.current.value, head: headRef.current.value, feet: feetRef.current.value, bmi: (weightDial*90+40)/((heightDial*70+140)*(heightDial*70+140)/10000)}}); 
-																					  /*nameRef.current.value=''; heightRef.current.value=''; weightRef.current.value=''; waistRef.current.value=''; headRef.current.value=''; feetRef.current.value='';*/}}>
-					우흥
+				<Button variant="outlined" size="large" color="primary"	onClick={()=>{
+					if(nameRef.current.value.trim()==='') {
+					   alert({ kr: '이름을 입력해주세요!', en: 'Please enter your name!' }[lang]);
+					}
+					else {
+						props.dispatch({type:'init', payload:{name: nameRef.current.value, height: (heightDial*70+140).toFixed(1), weight: (weightDial*90+40).toFixed(1), head: headRef.current.value, crotch: crotchRef.current.value, bmi: (weightDial*90+40)/((heightDial*70+140)*(heightDial*70+140)/10000)}});
+						history.push(`/${lang}/profile`); 
+					 }
+				}}>
+					{{ kr: '제출', en: 'Submit' }[lang]}
 				</Button>
 				</ThemeProvider>
 			</div>
