@@ -261,13 +261,23 @@ function Statistic(props) {
 		}
 	}, [props.info]);
 
+	// useEffect(()=>{ 	
+	// 	setToday(JSON.parse(JSON.stringify(new Date())));
+	// 	axios.get('/api')
+	// 	.then((res)=>{
+	// 		parseString(res.data, function (err, result) {
+	// 			setData(result.DS_RECRT_BDMSMNT_MSR_INF.row); 
+	// 		});
+	// 	})
+	// 	.catch(()=>{});
+	// 	setNowHistoryGraph('weight');
+	// }, []);
+	
 	useEffect(()=>{ 	
 		setToday(JSON.parse(JSON.stringify(new Date())));
 		axios.get('/api')
 		.then((res)=>{
-			parseString(res.data, function (err, result) {
-				setData(result.DS_RECRT_BDMSMNT_MSR_INF.row); 
-			});
+			setData(res.data.DS_RECRT_BDMSMNT_MSR_INF.row); 
 		})
 		.catch(()=>{});
 		setNowHistoryGraph('weight');
@@ -425,13 +435,13 @@ function Statistic(props) {
 	}, [nowHistoryGraph, page]);
 	
 	return (
-	<div className={`playlistTab`}>
-		<div className={`setlistArea ${activeArea}`}>
+	<div className={`statisticTab`}>
+		<div className={`positionArea ${activeArea}`}>
 			<div className='labelArea' onClick={()=>setActiveArea(activeArea==='playlist'?'setlist':'playlist')}><div className='label'>
 				{{kr: '나의 위치', en: 'My Position'}[lang]}
 				{activeArea==='setlist'?<ArrowDropUpIcon style={{fontSize: 30, color:props.theme==='dark'?'#ffffff':'#444444'}}></ArrowDropUpIcon>:<ArrowDropDownIcon style={{fontSize: 30, color:props.theme==='dark'?'#ffffff':'#444444'}}></ArrowDropDownIcon>}
 			</div></div>
-			<div className='contentArea' onClick={()=>setActiveArea('setlist')}> 
+			<div className='contentArea' onTouchStart={()=>setActiveArea('setlist')}> 
 				{(props.info !== null && props.info[latestIdx]?.data!==undefined && data) ?(
 	<>
 	   <div className='alignCenter toggleArea'>
@@ -457,7 +467,7 @@ function Statistic(props) {
 		</div>
 		<div className={'wrap'}><div className={'graphArea'}>
 			{nowGraph && <Bar data={graph} options={props.theme==='dark'?darkOptions:options} height={350} />}
-			<div className='text'> {{
+			<div className='text percentage'> {{
 				height: `${{kr: '당신의 키', en: 'Your height of'}[lang]} ${props.info[latestIdx].data.height}cm ${{kr: '는 상위', en: 'is top'}[lang]} ${!heightIdx?100:heightPercentage[heightIdx - 1]}% ~ ${heightPercentage[heightIdx]}%`, 
 				weight: `${{kr: '당신의 몸무게', en: 'Your weight of'}[lang]} ${props.info[latestIdx].data.weight}kg ${{kr: '은 상위', en: 'is top'}[lang]} ${!weightIdx?100:weightPercentage[weightIdx - 1]}% ~ ${weightPercentage[weightIdx]}%`,
 				head: props.info[latestIdx].data.head&&`${{kr: '당신의 머리 둘레', en: 'Your head circumference of'}[lang]} ${props.info[latestIdx].data.head}cm ${{kr: '는 상위', en: 'is top'}[lang]} ${!headIdx?100:headPercentage[headIdx - 1]}% ~ ${headPercentage[headIdx]}%`, 
@@ -474,13 +484,13 @@ function Statistic(props) {
 			</div>
 		</div>
 	
-		<div className={`playlistArea ${activeArea}`}>
+		<div className={`recordArea ${activeArea}`}>
 			<div className='labelArea' onClick={()=>setActiveArea(activeArea==='playlist'?'setlist':'playlist')}><div className='label'>
 				{{kr: '나의 기록', en: 'My Record'}[lang]}
 				{activeArea!=='playlist'?<ArrowDropUpIcon style={{fontSize: 30, color:props.theme==='dark'?'#ffffff':'#444444'}}></ArrowDropUpIcon>:<ArrowDropDownIcon style={{fontSize: 30, color:props.theme==='dark'?'#ffffff':'#444444'}}></ArrowDropDownIcon>}
 			</div></div>
 			
-			<div className='contentArea' onClick={()=>setActiveArea('playlist')}> 
+			<div className='contentArea' onTouchStart={()=>setActiveArea('playlist')}> 
 			<div className='alignCenter toggleArea'>
 			{props.theme==='dark' ? 
 				<ToggleButtonGroup size='small' exclusive={true} value={nowHistoryGraph} onChange={(e, value)=>{if(value) setNowHistoryGraph(value);}}>

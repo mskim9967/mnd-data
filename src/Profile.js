@@ -103,8 +103,14 @@ function Profile(props) {
 			<ThemeProvider theme={props.theme==='dark'?{...darkTheme}:{...lightTheme}}>
 			<div className='aimWei'><TextField id="standard-basic" label={{ kr: '목표 체중(kg)', en: 'Target Weight(kg)' }[lang]} inputRef={aimWeiRef}/> </div>	
 			<Button variant="outlined" size="large" color="primary"	onClick={()=>{
-				localStorage.setItem('aimWei', JSON.stringify(aimWeiRef.current.value));
-				setModal(false);	
+				if(/^-?\d+\.?\d*$/.test(aimWeiRef.current.value)) {
+					localStorage.setItem('aimWei', JSON.stringify(aimWeiRef.current.value));
+					setModal(false);	
+				}
+				else {
+					alert({ kr: '숫자만 입력해 주세요!', en: 'Please enter only numbers!' }[lang]);
+				}
+				
 			}}>
 				{{ kr: '등록', en: 'submit' }[lang]}
 			</Button>

@@ -122,7 +122,7 @@ function Setting(props) {
 					  }} checkboxSelection />
 			</div>
 			<div className={`deleteButton`}>
-				<Button variant="outlined" size="large" color="primary"	onClick={()=>{console.log(selectedRows); if(selectedRows.length === latestIdx + 1) {props.dispatch({type:'clear'}); history.replace(`/${lang}/welcome`);} else props.dispatch({type:'delete', payload:selectedRows});}}>
+				<Button variant="outlined" size="large" color="primary"	onClick={()=>{ if(selectedRows.length === latestIdx + 1) {props.dispatch({type:'clear'}); history.replace(`/${lang}/welcome`);} else props.dispatch({type:'delete', payload:selectedRows});}}>
 					 {{ kr: '삭제', en: 'Delete' }[lang]}
 				</Button>
 			</div>
@@ -170,6 +170,12 @@ function Setting(props) {
 				</ListItem>
 				<ListItem button>
 				  <ListItemText primary={{ kr: "모든 데이터 초기화", en: "Clear all data" }[lang]} onClick={()=>{ props.dispatch({type:'clear'});history.replace(`/${lang}/welcome`)}}/>
+				</ListItem>
+			  </List>
+			<Divider />
+			  <List component="nav" aria-label="secondary mailbox folders">
+			  	<ListItem button>
+				  <ListItemText primary={{ kr: "본 데이터는 Open API로 공개된 데이터로서 대한민국 육군 소속 신병 신체측정 치수 정보를 가져오고 있습니다.", en: "This data is released through Open API and we are importing the dimension information of physical measurement of recruits belonging to the Republic of Korea Army." }[lang]}/>
 				</ListItem>
 			  </List>
 		</div>

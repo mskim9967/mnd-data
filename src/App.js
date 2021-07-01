@@ -4,7 +4,6 @@ import { BrowserRouter as Switch, Route, Redirect } from 'react-router-dom';
 
 import Nav from './Nav.js';
 import Content from './Content.js';
-import Popup from './Popup.js';
 
 function App(props) {
 	useEffect(()=>{
@@ -17,12 +16,7 @@ function App(props) {
 		document.documentElement.style.setProperty("--shadow", '#8f8f8f');
 		document.documentElement.style.setProperty("--darkShadow", '#000000');	
 		document.documentElement.style.setProperty("--eleBg", '#f5f5f5');	
-		
-		document.documentElement.style.setProperty("--im", '#fffcfc');	
-		document.documentElement.style.setProperty("--cg", '#f5f8ff');	
-		document.documentElement.style.setProperty("--ml", '#fffff9');	
-		document.documentElement.style.setProperty("--sm", '#f7fffa');
-		document.documentElement.style.setProperty("--sc", '#f7ffff');	
+	
 	}
 	else {
 		document.documentElement.style.setProperty("--text", '#dddddd');
@@ -33,12 +27,6 @@ function App(props) {
 		document.documentElement.style.setProperty("--shadow", '#000000');
 		document.documentElement.style.setProperty("--darkShadow", '#777777');	
 		document.documentElement.style.setProperty("--eleBg", '#333333');	
-		
-		document.documentElement.style.setProperty("--im", '#362e2e');	
-		document.documentElement.style.setProperty("--cg", '#2e3036');	
-		document.documentElement.style.setProperty("--ml", '#36342e');	
-		document.documentElement.style.setProperty("--sm", '#2e3636');
-		document.documentElement.style.setProperty("--sc", '#2e3636');	
 	}
 },[props.theme])
 
@@ -59,7 +47,7 @@ function App(props) {
 					<Content></Content>
 					<Nav></Nav>
 				</Route>
-				<Route exact path="/:lang" render={props => (<Redirect to={`/${props.match.params.lang}/songs`} />)}/>
+				<Route exact path="/:lang" render={props => (<Redirect to={`/${props.match.params.lang}/welcome`} />)}/>
 				<Route exact path="/" render={props => (<Redirect to={'/kr/welcome'}/>)}/>
 			</Switch>
 		</div>
@@ -69,7 +57,6 @@ function App(props) {
 function stateToProps(state) {
     return {
 				info: state.infoReducer,
-				
 				lang: state.langReducer,
 				nowPage: state.pageReducer,
 				theme: state.themeReducer,

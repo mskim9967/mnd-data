@@ -31,10 +31,10 @@ function Main(props) {
 	return (
 	<div className={`main alignCenter`}>
 		<div className={`info `}>
-			<p>안녕하세요!</p>
-			<p>등록된 신체 정보가 없어요 :(</p>
+			<p>{{ kr: '안녕하세요!', en: 'Hello!' }[lang]}</p>
+			<p>{{ kr: '등록된 신체 정보가 없어요 :(', en: 'There is no registered physical information :(' }[lang]}</p>
 			 <Button variant="outlined" size="large" color="primary"	onClick={()=>history.push(`/${lang}/init`)}>
-          신체 정보 등록하러 가기
+				 {{ kr: '신체 정보 등록하러 가기', en: 'Enter body information' }[lang]}
         </Button>
 		</div>
 	</div>
