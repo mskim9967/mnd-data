@@ -102,10 +102,13 @@ function Setting(props) {
 		
 		if(page==='setting') {
 			let temp = [];
+			console.log(typeof(props.info)!=='object');
 			if(props.info?.length)
-				props.info?.map((e, i)=>{
+				for(let i = 0; i < props.info.length; i++) {
+					let e = props.info[i];
+			   		if(e.data===undefined) break;
 					temp.push({id: i, date: e.date.slice(2,10).replace(/-/g,'/'), height: e.data.height, weight:e.data.weight})
-				});
+				}
 			setRows(temp);
 		}
 	}, [location, props.info]);

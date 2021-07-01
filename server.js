@@ -3,6 +3,7 @@ var app = express();
 const path = require('path');
 const cors = require('cors');
 var request = require('request')
+var parseString = require('xml2js').parseString;
 
 const port = 3001;
 
@@ -24,7 +25,7 @@ app.use(cors());
 
 app.use(express.static(path.join(__dirname, '/build'))); 
 
-var db;
+var db = null;
 
 // app.get('/api', function (req, res) {
 // 	request('https://openapi.mnd.go.kr/3938313636333430383831313732313239/xml/DS_RECRT_BDMSMNT_MSR_INF/1/100000', function(error, response, body){
@@ -38,15 +39,19 @@ var db;
 
 app.get('/api', function (req, res) {
 	//console.log(db);
-	if(db)
+	if(db === null)
 		res.send(db); 
 	else {
-			request('https://openapi.mnd.go.kr/3938313636333430383831313732313239/xml/DS_RECRT_BDMSMNT_MSR_INF/1/100000', function(error, response, body){
+request('https://openapi.mnd.go.kr/3938313636333430383831313732313239/xml/DS_RECRT_BDMSMNT_MSR_INF/1/100000', function(error, response, body){
 		if(error){
 		  console.log(error)
 		}
-	    db = parser.parse(body);
-		res.send(parser.parse(body));
+		parseString(body, function (err, result) {
+			db = result;
+			res.send(result);
+		});
+		// db = parser.parse(body);
+		// res.send(parser.parse(body));
 	})
 	}
 
