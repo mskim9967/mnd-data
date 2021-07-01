@@ -235,7 +235,7 @@ export default  connect(stateToProps)(function VerticalTabs() {
 	});
 	
 	useEffect(()=>{ 	
-		axios.get('https://www.googleapis.com/youtube/v3/search', { params:params1 })
+		axios.get('/youtube/플랭크')
 		.then((res)=>{
 			let tmp = [];
 			res.data.items.map(e=>{
@@ -246,7 +246,7 @@ export default  connect(stateToProps)(function VerticalTabs() {
 
 		})
 		.catch((e)=>{console.log(e.response)});
-		axios.get('https://www.googleapis.com/youtube/v3/search', { params:params2 })
+		axios.get('/youtube/스쿼트')
 		.then((res)=>{
 			let tmp = [];
 			res.data.items.map(e=>{
@@ -256,7 +256,7 @@ export default  connect(stateToProps)(function VerticalTabs() {
 			setSqartArr([...tmp.slice(0,10)]);
 		})
 		.catch(()=>{});
-		axios.get('https://www.googleapis.com/youtube/v3/search', { params:params3 })
+		axios.get('/youtube/런지')
 		.then((res)=>{
 			let tmp = [];
 			res.data.items.map(e=>{
@@ -266,7 +266,7 @@ export default  connect(stateToProps)(function VerticalTabs() {
 			setLungeArr([...tmp.slice(0,10)]);
 		})
 		.catch(()=>{});
-		axios.get('https://www.googleapis.com/youtube/v3/search', { params:params4 })
+		axios.get('/youtube/푸쉬업')
 		.then((res)=>{
 			let tmp = [];
 			res.data.items.map(e=>{
@@ -276,7 +276,7 @@ export default  connect(stateToProps)(function VerticalTabs() {
 			setPushupArr([...tmp.slice(0,10)]);
 		})
 		.catch(()=>{});
-		axios.get('https://www.googleapis.com/youtube/v3/search', { params:params5 })
+		axios.get('/youtube/딥스')
 		.then((res)=>{
 			let tmp = [];
 			res.data.items.map(e=>{
@@ -286,7 +286,7 @@ export default  connect(stateToProps)(function VerticalTabs() {
 			setDipsArr([...tmp.slice(0,10)]);
 		})
 		.catch(()=>{});
-		axios.get('https://www.googleapis.com/youtube/v3/search', { params:params6 })
+		axios.get('/youtube/풀업')
 		.then((res)=>{
 			let tmp = [];
 			res.data.items.map(e=>{
@@ -296,7 +296,7 @@ export default  connect(stateToProps)(function VerticalTabs() {
 			setPullupArr([...tmp.slice(0,10)]);
 		})
 		.catch(()=>{});
-		axios.get('https://www.googleapis.com/youtube/v3/search', { params:params7 })
+		axios.get('/youtube/달리기')
 		.then((res)=>{
 			let tmp = [];
 			res.data.items.map(e=>{
@@ -306,7 +306,7 @@ export default  connect(stateToProps)(function VerticalTabs() {
 			setRunningArr([...tmp.slice(0,10)]);
 		})
 		.catch(()=>{});
-		axios.get('https://www.googleapis.com/youtube/v3/search', { params:params8 })
+		axios.get('/youtube/버피')
 		.then((res)=>{
 			let tmp = [];
 			res.data.items.map(e=>{
@@ -316,7 +316,7 @@ export default  connect(stateToProps)(function VerticalTabs() {
 			setBuppyArr([...tmp.slice(0,10)]);
 		})
 		.catch(()=>{});
-		axios.get('https://www.googleapis.com/youtube/v3/search', { params:params9 })
+		axios.get('/youtube/줄넘기')
 		.then((res)=>{
 			let tmp = [];
 			res.data.items.map(e=>{

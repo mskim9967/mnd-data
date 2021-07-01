@@ -178,7 +178,7 @@ function Setting(props) {
 			<Divider />
 			  <List component="nav" aria-label="secondary mailbox folders">
 			  	<ListItem button>
-				  <ListItemText primary={{ kr: "본 데이터는 Open API로 공개된 데이터로서 대한민국 육군 소속 신병 신체측정 치수 정보를 가져오고 있습니다.", en: "This data is released through Open API and we are importing the dimension information of physical measurement of recruits belonging to the Republic of Korea Army." }[lang]}/>
+				  <ListItemText primary={{ kr: "본 서비스의 데이터는 Open API로 공개된 데이터로서 대한민국 육군 소속 신병 신체측정 치수 정보를 가져오고 있습니다.", en: "Data of this service is released through Open API and we are importing the dimension information of physical measurement of recruits belonging to the Republic of Korea Army." }[lang]}/>
 				</ListItem>
 			  </List>
 		</div>
