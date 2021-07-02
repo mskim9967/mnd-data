@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux'
 import { useParams, useHistory, useLocation } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
+import PWAInstallerPrompt from 'react-pwa-installer-prompt';
 
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
@@ -99,6 +100,13 @@ function Profile(props) {
 	
 			   
 	<div className={`profile`}>
+				   <PWAInstallerPrompt 
+      render={({ onClick }) => (
+        <button type="button"> // make sure you pass onClick
+          Install
+        </button>
+      )}
+    />
 		<div className={`modal ${!modal&&'inactive'}`}>
 			<ThemeProvider theme={props.theme==='dark'?{...darkTheme}:{...lightTheme}}>
 			<div className='aimWei'><TextField id="standard-basic" label={{ kr: '목표 체중(kg)', en: 'Target Weight(kg)' }[lang]} inputRef={aimWeiRef}/> </div>	

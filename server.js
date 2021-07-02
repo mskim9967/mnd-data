@@ -10,13 +10,13 @@ const port = 3001;
 var connect = require('connect');
 
 const schedule = require('node-schedule');
-const job = schedule.scheduleJob('* 0 * * *', function(){ request('https://openapi.mnd.go.kr/3938313636333430383831313732313239/xml/DS_RECRT_BDMSMNT_MSR_INF/1/100000', function(error, response, body){
-		if(error){
-		  console.log(error)
-		}
-	    db = parser.parse(body);
-	})
-});
+// const job = schedule.scheduleJob('* 0 * * *', function(){ request('https://openapi.mnd.go.kr/3938313636333430383831313732313239/xml/DS_RECRT_BDMSMNT_MSR_INF/1/100000', function(error, response, body){
+// 		if(error){
+// 		  console.log(error)
+// 		}
+// 	    db = parser.parse(body);
+// 	})
+// });
 var parser = require('fast-xml-parser');
 var he = require('he');
 

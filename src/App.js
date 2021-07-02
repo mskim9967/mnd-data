@@ -5,6 +5,7 @@ import { BrowserRouter as Switch, Route, Redirect } from 'react-router-dom';
 import Nav from './Nav.js';
 import Content from './Content.js';
 
+
 function App(props) {
 	useEffect(()=>{
 	if(props.theme==='light') {
@@ -50,6 +51,7 @@ function App(props) {
 				<Route exact path="/:lang" render={props => (<Redirect to={`/${props.match.params.lang}/welcome`} />)}/>
 				<Route exact path="/" render={props => (<Redirect to={'/kr/welcome'}/>)}/>
 			</Switch>
+
 		</div>
 		);
 }
