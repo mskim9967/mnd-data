@@ -4,7 +4,7 @@
 
 육군 신체측정 데이터를 기반으로 하여 정확도 높은 통계 및 지표 제공, 각종 운동법 공유 서비스 제공, 웹 앱(Web App)으로 제작되어 PC, 모바일 등 다양한 환경에서 설치과정 없이 간편하게 접근, 이용 가능한 서비스입니다. (모바일 Chrome에 최적화되어있습니다.)
 
-[##_Image|kage@bRB3g5/btq8KbZ1ONA/P2rgHJGkwDSHmxJhXYSHF1/img.png|alignCenter|width="100%" data-origin-width="1214" data-origin-height="509" data-ke-mobilestyle="widthOrigin"|||_##]<iframe src="https://www.youtube.com/embed/0EtwRB7gK5E" width="560" height="315" frameborder="0" allowfullscreen=""></iframe>
+<iframe src="https://www.youtube.com/embed/0EtwRB7gK5E" width="560" height="315" frameborder="0" allowfullscreen=""></iframe>
 
 ---
 
